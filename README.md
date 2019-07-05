@@ -3,3 +3,6 @@
 
 
 // Two functions creates multiple tickets in Zendesk with optional data you chose.
+
+Используемые инструменты и модули:
+json, requests, time
