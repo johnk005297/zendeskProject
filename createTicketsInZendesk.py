@@ -1,25 +1,33 @@
-import json
+﻿import json
 import requests
 import time
-
+import os
+import sys
 
 class zendesk:
 
     organizationIdAndName = dict()
     organizationId_and_usersId = dict()
 
-    user = 'login@domain.com' + '/token'
-    pwd = 'token'
+    user = 'ikutuzov@boardmaps.com' + '/token'
+    pwd = 'PwWDWXQYQvTKglDHagRF12fOkrZGMtPkWO0MXyQ4'
     headers = {'content-type': 'application/json'}
 
-    organizationsUrl = "https://domain.zendesk.com/api/v2/organizations.json"
-    ticketsUrl = "https://domain.zendesk.com/api/v2/tickets.json"
-    usersUrl = "https://domain.zendesk.com/api/v2/users.json"
+    organizationsUrl = "https://boardmaps.zendesk.com/api/v2/organizations.json"
+    ticketsUrl = "https://boardmaps.zendesk.com/api/v2/tickets.json"
+    usersUrl = "https://boardmaps.zendesk.com/api/v2/users.json"
 
-    subject = 'Title of the ticket!'
-    body = '''
-            This is the text of the ticket you create.
-          '''
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_path, "update_message.txt")
+
+    if os.path.exists(file_path):
+        with open(file_path, "r", encoding="utf-8") as file:
+            subject = file.readline()
+            body = file.read()
+    else:
+        print("There is no such file 'update_message.txt' here. Check it!")
+        sys.exit(0)
+
 
 
     def getOrganizationIdAndName(self):
@@ -96,9 +104,10 @@ class zendesk:
                             "requester_id": value[0],
                             "collaborator_ids": value[1:],
                             "submitter_id": 368808167351,
-                            "tags": "add_tags",
+                            "tags": "обновление_системы",
                             "is_public": True,
-                            "type": "task"  #"problem", "incident", "question" or "task"
+                            "type": "task",  #"problem", "incident", "question" or "task"
+                            "custom_fields": [{"id": 25092043, "value": "3"},{"id": 360000317531, "value": "обновление_системы"}]
                               }
                     }
 
@@ -120,6 +129,14 @@ class zendesk:
             time.sleep(1)
 
         print("\n\nDone! Total tickets:", count)
+
+
+#         Just a reminder for myself! This is very important to understand!
+#         Формы записи, которые приводят к коррекному запуску метода из класса zendesk:
+#          z = zendesk() // Создали объект-экземпляр класса zendesk()
+#          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(zendesk)
+#          z.getOrganizationIdAndName()      или        zendesk().getOrganizationIdAndName()
+#          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(z)
 
 
 z = zendesk()
