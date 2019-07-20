@@ -1,4 +1,4 @@
-﻿import json
+import json
 import requests
 import time
 import os
@@ -131,15 +131,20 @@ class zendesk:
         print("\n\nDone! Total tickets:", count)
 
 
-#         Just a reminder for myself! This is very important to understand!
-#         Формы записи, которые приводят к коррекному запуску метода из класса zendesk:
-#          z = zendesk() // Создали объект-экземпляр класса zendesk()
-#          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(zendesk)
-#          z.getOrganizationIdAndName()      или        zendesk().getOrganizationIdAndName()
-#          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(z)
+        #         Just a reminder for myself! This is very important to understand!
+        #         Формы записи, которые приводят к коррекному запуску метода из класса zendesk:
+        #          z = zendesk() // Создали объект-экземпляр класса zendesk()
+        #          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(zendesk)
+        #          z.getOrganizationIdAndName()      или        zendesk().getOrganizationIdAndName()
+        #          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(z)
+
+    def main(self):
+
+        z = zendesk()
+        z.getOrganizationIdAndName()            # Getting a dictionary {int[organizationId]:str"organizationName"}
+        z.getOrganizationId_and_usersId()       # Getting a dictionary {int[organizationId]:int[usersId]}, users only with updateinfo flag!
+        z.createNewTicket()                     # Method creates multiple tickets and assign them to users with updateinfo flags!
 
 
-z = zendesk()
-z.getOrganizationIdAndName()           # Getting a dictionary {int[organizationId]:str"organizationName"}
-z.getOrganizationId_and_usersId()      # Getting a dictionary {int[organizationId]:int[usersId]}, users only with updateinfo flag!
-z.createNewTicket()                    # Method creates multiple tickets and assign them to users with updateinfo flags!
+if __name__ == "__main__":
+    zendesk().main()
