@@ -9,13 +9,13 @@ class zendesk:
     organizationIdAndName = dict()
     organizationId_and_usersId = dict()
 
-    user = 'ikutuzov@boardmaps.com' + '/token'
-    pwd = 'PwWDWXQYQvTKglDHagRF12fOkrZGMtPkWO0MXyQ4'
+    user = 'login@domain' + '/token'
+    pwd = 'your_token'
     headers = {'content-type': 'application/json'}
 
-    organizationsUrl = "https://boardmaps.zendesk.com/api/v2/organizations.json"
-    ticketsUrl = "https://boardmaps.zendesk.com/api/v2/tickets.json"
-    usersUrl = "https://boardmaps.zendesk.com/api/v2/users.json"
+    organizationsUrl = "https://domain.zendesk.com/api/v2/organizations.json"
+    ticketsUrl = "https://domain.zendesk.com/api/v2/tickets.json"
+    usersUrl = "https://domain.zendesk.com/api/v2/users.json"
 
     base_path = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_path, "update_message.txt")
@@ -130,14 +130,7 @@ class zendesk:
 
         print("\n\nDone! Total tickets:", count)
 
-
-        #         Just a reminder for myself! This is very important to understand!
-        #         Формы записи, которые приводят к коррекному запуску метода из класса zendesk:
-        #          z = zendesk() // Создали объект-экземпляр класса zendesk()
-        #          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(zendesk)
-        #          z.getOrganizationIdAndName()      или        zendesk().getOrganizationIdAndName()
-        #          z.getOrganizationIdAndName()      или        zendesk.getOrganizationIdAndName(z)
-
+     
     def main(self):
 
         z = zendesk()
