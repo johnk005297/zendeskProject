@@ -10,7 +10,7 @@ class zendesk:
     organizationId_and_usersId = dict()
 
     user = 'login@domain' + '/token'
-    pwd = 'your_token'
+    pwd = 'token'
     headers = {'content-type': 'application/json'}
 
     organizationsUrl = "https://domain.zendesk.com/api/v2/organizations.json"
